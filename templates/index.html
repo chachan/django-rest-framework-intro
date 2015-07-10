@@ -9,14 +9,10 @@
 <div class="container">
     {% verbatim %}
     <ul class="collection">
-        <li class="collection-item">
-            <span class="title">Title</span>
+        <li class="collection-item" data-ng-repeat="each in tasks">
+            <h4>{{ each.title }}</h4>
 
-            <p>First Line <br>
-            </p>
-            {{ task.title }}<br>
-            {{ task.content }}
-            <a href="#!" class="secondary-content"></a>
+            <p>{{ each.content }}</p>
         </li>
     </ul>
     <!-- Modal Trigger -->
@@ -28,12 +24,13 @@
         <div class="modal-content">
             <h4>Create a task</h4>
             <label for="taskTitle">Title</label>
-            <input id="taskTitle" type="text" data-ng-model="task.title" />
+            <input id="taskTitle" type="text" data-ng-model="task.title"/>
             <label for="taskContent">Content</label>
             <textarea id="taskContent" class="materialize-textarea" data-ng-model="task.content"></textarea>
         </div>
         <div class="modal-footer">
-            <button class="modal-action modal-close waves-effect waves-green btn-flat" data-ng-click="create()">Save</button>
+            <button class="modal-action modal-close waves-effect waves-green btn-flat" data-ng-click="create()">Save
+            </button>
         </div>
     </div>
     {% endverbatim %}
