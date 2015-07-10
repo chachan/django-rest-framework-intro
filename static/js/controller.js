@@ -7,7 +7,7 @@ djangoVEControllers.controller("taskController", ["$scope", "Task", function ($s
     var success = function (value, responseHeaders) {
         $scope.tasks = Task.read();
         $scope.task = {};
-        Materialize.toast("Task has been saved successfully", 4000)
+        Materialize.toast($scope.message, 4000)
     };
 
     var error = function (value, responseHeaders) {
@@ -17,12 +17,18 @@ djangoVEControllers.controller("taskController", ["$scope", "Task", function ($s
     };
 
     $scope.save = function () {
+        $scope.message = "Task has been saved successfully";
         if ($scope.task.id === undefined) { // New task
-            Task.create($scope.task, success);
+            Task.create($scope.task, success, error);
         }
         else { // Update task
-            Task.update({pk: $scope.task.id}, $scope.task, success)
+            Task.update({pk: $scope.task.id}, $scope.task, success, error)
         }
+    };
+
+    $scope.delete = function (id) {
+        $scope.message = "Task has been deleted successfully";
+        Task.delete({pk: id}, {}, success, error);
     };
 
 
